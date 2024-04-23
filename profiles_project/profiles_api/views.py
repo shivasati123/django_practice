@@ -8,6 +8,8 @@ from profiles_api import serializers
 
 from profiles_api import permissions
 
+from rest_framework import filters
+
 from rest_framework.authentication import TokenAuthentication;
 
 
@@ -44,3 +46,5 @@ class ProfileViewSet(viewsets.ModelViewSet):
     queryset = models.UserProfile.objects.all()
     authentication_classes = (TokenAuthentication ,)
     permission_classes = (permissions.UpdateProfile,)
+    filter_backends =  (filters.SearchFilter,)
+    search_fields = ('name','email',)
